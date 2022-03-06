@@ -1,0 +1,13 @@
+.pb{
+    font-weight: 700;
+}
+input{
+    width: 35px;
+}
+
+button{
+    position: relative;
+    display: block;
+    margin:1em;
+    padding: 0,5em;
+}

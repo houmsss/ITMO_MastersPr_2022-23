@@ -1,0 +1,21 @@
+.btn{
+ position: relative;
+ display: inline-block;
+ border-radius: 25%;
+ margin: 2em;
+ padding: 1.4em;
+ background-image: linear-gradient(to right, #ae49dd 33%, #4830F0 51%, #7fe0a0 100%);
+ background-size: 200% auto;
+ box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+ transition: .5s;
+}
+.btn:hover{
+    background-position: right center;
+    color:white;
+}
+a{
+    color: white;  
+}
+a:visited{
+    color: white;
+}

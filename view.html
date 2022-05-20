@@ -33,7 +33,7 @@ var floorMaterial = new THREE.MeshPhongMaterial({color: 0xf5b8bf,shininess: 1});
 var floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -0.5 * Math.PI;
 floor.receiveShadow = true;
-floor.position.y = -15;
+floor.position.y = -18;
 scene.add(floor);
 <!--Шрифт-->
 const loader = new THREE.FontLoader();
@@ -67,30 +67,47 @@ color: 0x318f2e,
 specular: 0x66d4b8,
  } );
 var cube = new THREE.Mesh( geometry, material );
+cube.position.x = +3;
+cube.position.y = 0;
+cube.position.z = 0;
 var cube1 = new THREE.Mesh( geo1, material );
 var cube2 = new THREE.Mesh( geo1, material );
 cube1.position.x +=20
 cube1.position.y +=10
 cube2.position.x -=20
 cube2.position.y -=10
+
+
 scene.add( cube );
 scene.add( cube1 );
 scene.add( cube2 );
 
-camera.position.z = 25;
 
-function render() {
-  requestAnimationFrame( render );
-  cube.rotation.x -= 0.01;
-  cube.rotation.y += 0.01;
-  cube.castShadow = 1
+
+camera.position.z = 45;
+var angle = 1;
+
+function animate() {
+  requestAnimationFrame( animate );
+  cube.position.y += 0.3*Math.sin(angle);
+  cube.position.x += 0.3*Math.cos(angle);
+  cube.position.y -= 0.2*Math.sin(angle);
+
+  angle += Math.PI/180*2;
+  cube.rotation.x += 0.03;
+  cube.rotation.y += 0.03;
   cube1.rotation.x += 0.01;
   cube1.rotation.y -= 0.01;
+    cube1.position.y += 0.3*Math.sin(angle);
+    cube1.position.x += 0.3*Math.cos(angle);
   cube2.rotation.x -= 0.01;
   cube2.rotation.y -= 0.01;
+    cube2.position.y += 0.3*Math.sin(angle);
+    cube2.position.x += 0.3*Math.cos(angle);
   renderer.render( scene, camera );
 }
-render();
+
+animate();
     </script>
 
 

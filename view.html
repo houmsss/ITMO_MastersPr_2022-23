@@ -88,28 +88,111 @@ camera.position.z = 45;
 var angle = 1;
 
 function animate() {
-  requestAnimationFrame( animate );
+  AnimationReq = requestAnimationFrame( animate );
   cube.position.y += 0.3*Math.sin(angle);
   cube.position.x += 0.3*Math.cos(angle);
   cube.position.y -= 0.2*Math.sin(angle);
-
   angle += Math.PI/180*2;
   cube.rotation.x += 0.03;
   cube.rotation.y += 0.03;
   cube1.rotation.x += 0.01;
-  cube1.rotation.y -= 0.01;
-    cube1.position.y += 0.3*Math.sin(angle);
-    cube1.position.x += 0.3*Math.cos(angle);
+  cube1.rotation.y += 0.01;
+  cube1.position.y += 0.3*Math.sin(angle);
+  cube1.position.x += 0.3*Math.cos(angle);
   cube2.rotation.x -= 0.01;
   cube2.rotation.y -= 0.01;
-    cube2.position.y += 0.3*Math.sin(angle);
-    cube2.position.x += 0.3*Math.cos(angle);
+  cube2.position.y += 0.3*Math.sin(angle);
+  cube2.position.x += 0.3*Math.cos(angle);
   renderer.render( scene, camera );
 }
 
-animate();
+function Stop() {
+  cancelAnimationFrame( AnimationReq );
+  renderer.render( scene, camera );
+}
+
+renderer.render( scene, camera );
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyW') {
+    camera.position.z += 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyS') {
+    camera.position.z -= 5;
+    renderer.render( scene, camera );
+  } 
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyA') {
+    camera.position.x += 5;
+    renderer.render( scene, camera );
+
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyD') {
+    camera.position.x -= 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyE') {
+    camera.position.x -= 5;
+    camera.position.y -= 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyQ') {
+    camera.position.x += 5;
+    camera.position.y -= 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyZ') {
+    camera.position.x += 5;
+    camera.position.y += 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyC') {
+    camera.position.x -= 5;
+    camera.position.y += 5;
+    renderer.render( scene, camera );
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'KeyX') {
+    animate();
+    
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  if (event.code == 'Escape') {
+    Stop();
+  }
+});
+
     </script>
 
+    <script>
+      
+      
+      </script>
 
 </body>
 </html>

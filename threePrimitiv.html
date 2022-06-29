@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Обоснование</title>
+    <style>
+    h1{
+    display:flex;
+    justify-content:center;}
+    p{
+    display:block;
+    text-align:center;
+    width:50%;
+    margin-left:25%}
+    canvas { width: 100%; height: 100%; background:white; margin-left:25px}
+    </style>
+
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
+<script src="https://r105.threejsfundamentals.org/threejs/resources/threejs/r105/js/controls/OrbitControls.js"></script>
+<script src="https://r105.threejsfundamentals.org/threejs/../3rdparty/dat.gui.min.js"></script>
+<script>
+'use strict';
+
+/* global THREE, dat */
+
+function main() {
+  const canvas = document.querySelector('#c');
+  const renderer = new THREE.WebGLRenderer({canvas});
+
+  const fov = 45;
+  const aspect = 2;  // the canvas default
+  const near = 0.1;
+  const far = 100;
+  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(0, 10, 20);
+
+
+
+  function updateCamera() {
+    camera.updateProjectionMatrix();
+  }
+
+  const controls = new THREE.OrbitControls(camera, canvas);
+  controls.target.set(0, 5, 0);
+  controls.update();
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('black');
+
+
+  {
+const loader = new THREE.TextureLoader();
+const material = new THREE.MeshBasicMaterial({
+  color: 0xFFFFFF,
+  map: loader.load('4k-brown-brickwall-close-up-brown-bricks-brick-wall.jpg'),
+});
+    const cubeSize = 4;
+    const cubeGeo = new THREE.BoxBufferGeometry(cubeSize, cubeSize, cubeSize);
+    const cubeMat = new THREE.MeshPhongMaterial({color: '#8AC'});
+    const mesh = new THREE.Mesh(cubeGeo, material);
+    mesh.position.set(0, cubeSize/2, 0);
+    scene.add(mesh);
+  }
+
+  {
+
+    const color = 0xFFFFFF;
+const intensity = 1;
+
+const light = new THREE.PointLight(color, intensity);
+const light1 = new THREE.PointLight(color, intensity);
+light.position.set(-10, 10, -5);
+light1.position.set(10, 10, 5);
+scene.add(light);
+scene.add(light1);
+
+  }
+
+  function resizeRendererToDisplaySize(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+      renderer.setSize(width, height, false);
+    }
+    return needResize;
+  }
+
+  function render() {
+
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
+    }
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+}
+
+main();
+
+    </script>
+</body>
+</html>
